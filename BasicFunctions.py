@@ -43,12 +43,12 @@ def nodus_horizontal(tau, delta, phi):
     The origin (0,0) is placed under the nodus, whose length is set to 1.
 
     """
-    sv=sun_vector(tau, delta, phi)
-    if sv[2]<0:
-        if phi>=0:
-            return np.array([-sv[0]/sv[2],-sv[1]/sv[2]])
+    sv = sun_vector(tau, delta, phi)
+    if sv[2] < 0:
+        if phi >= 0:
+            return np.array([-sv[0]/sv[2], -sv[1]/sv[2]])
         else:
-            return np.array([sv[0]/sv[2],sv[1]/sv[2]])
+            return np.array([sv[0]/sv[2], sv[1]/sv[2]])
     else:
         return np.array([np.nan, np.nan])
     
@@ -70,15 +70,15 @@ def nodus_vertical(tau, delta, phi):
     The origin (0,0) is placed under the nodus (the connection between nodus and the origin is perpendicular to the dial plane), whose length is set to 1.
 
     """
-    sv=sun_vector(tau,delta,phi)
-    if phi>=0:
-        if sv[1]>0 and sv[2]<0:
-            return np.array([sv[0]/sv[1],sv[2]/sv[1]])
+    sv = sun_vector(tau, delta, phi)
+    if phi >= 0:
+        if sv[1] > 0 and sv[2] < 0:
+            return np.array([sv[0]/sv[1], sv[2]/sv[1]])
         else: 
             return np.array([np.nan, np.nan])
     else:
-        if sv[1]<0 and sv[2]<0:
-            return np.array([sv[0]/sv[1],-sv[2]/sv[1]])
+        if sv[1] < 0 and sv[2] < 0:
+            return np.array([sv[0]/sv[1], -sv[2]/sv[1]])
         else: 
             return np.array([np.nan, np.nan])        
 
@@ -101,29 +101,29 @@ def nodus_equatorial(tau, delta, phi, upper_side=True):
     The origin (0,0) is placed under the nodus (the connection between nodus and the origin is perpendicular to the dial plane), whose length is set to 1.
 
     """
-    sv=sun_vector(tau, delta, phi)
-    if phi>=0:
+    sv = sun_vector(tau, delta, phi)
+    if phi >= 0:
         if upper_side:
-            if delta>0 and sv[2]<0:
-                return np.array([sin(tau)/tan(delta),cos(tau)/tan(delta)])
+            if delta > 0 and sv[2] < 0:
+                return np.array([sin(tau)/tan(delta), cos(tau)/tan(delta)])
             else: 
-                return np.array([np.nan,np.nan])
+                return np.array([np.nan, np.nan])
         else:
-            if delta<0 and sv[2]<0:
-                return np.array([-sin(tau)/tan(delta),cos(tau)/tan(delta)])
+            if delta < 0 and sv[2] < 0:
+                return np.array([-sin(tau)/tan(delta), cos(tau)/tan(delta)])
             else: 
-                return np.array([np.nan,np.nan])
+                return np.array([np.nan, np.nan])
     else:
         if upper_side:
-            if delta<0 and sv[2]<0: 
-                return np.array([sin(tau)/tan(delta),-cos(tau)/tan(delta)])
+            if delta < 0 and sv[2] < 0:
+                return np.array([sin(tau)/tan(delta), -cos(tau)/tan(delta)])
             else: 
-                return np.array([np.nan,np.nan])
+                return np.array([np.nan, np.nan])
         else:
-            if delta>0 and sv[2]<0:
-                return np.array([-sin(tau)/tan(delta),-cos(tau)/tan(delta)])
+            if delta > 0 and sv[2] < 0:
+                return np.array([-sin(tau)/tan(delta), -cos(tau)/tan(delta)])
             else: 
-                return np.array([np.nan,np.nan])
+                return np.array([np.nan, np.nan])
 
 
 def nodus_polar(tau, delta, phi):
@@ -143,13 +143,13 @@ def nodus_polar(tau, delta, phi):
     The origin (0,0) is placed under the nodus (the connection between nodus and the origin is perpendicular to the dial plane), whose length is set to 1.
 
     """
-    if -np.pi/2<tau<np.pi/2 and sun_vector(tau,delta,phi)[2]<0:
-        if phi>=0:
-            return np.array([tan(tau),-tan(delta)])
+    if -np.pi/2 < tau < np.pi/2 and sun_vector(tau, delta, phi)[2] < 0:
+        if phi >= 0:
+            return np.array([tan(tau), -tan(delta)])
         else:
-            return np.array([-tan(tau),tan(delta)])
+            return np.array([-tan(tau), tan(delta)])
     else: 
-        return np.array([np.nan,np.nan])
+        return np.array([np.nan, np.nan])
 
 
 def nodus_arbitrary_orientation(tau, delta, phi, alpha, beta):
@@ -179,14 +179,14 @@ def nodus_arbitrary_orientation(tau, delta, phi, alpha, beta):
     The origin (0,0) is placed under the nodus (the connection between nodus and the origin is perpendicular to the dial plane, i.e. the nodus is parallel to n), whose length is set to 1.
 
     """
-    sv=sun_vector(tau,delta,phi)
-    n=np.array([-sin(alpha)*sin(beta),sin(alpha)*cos(beta),cos(alpha)])
-    v1=([cos(beta),sin(beta),0])
-    v2=np.array([-cos(alpha)*sin(beta),cos(alpha)*cos(beta),-sin(alpha)])
-    M=np.transpose(np.array([-sv,v1,v2]))
-    sol=np.linalg.solve(M,n)
-    if sol[0]>0 and sv[2]<0:
-        return np.array([sol[1],sol[2]])
+    sv = sun_vector(tau, delta, phi)
+    n = np.array([-sin(alpha)*sin(beta), sin(alpha)*cos(beta), cos(alpha)])
+    v1 = np.array([cos(beta), sin(beta), 0])
+    v2 = np.array([-cos(alpha)*sin(beta), cos(alpha)*cos(beta), -sin(alpha)])
+    M = np.transpose(np.array([-sv, v1, v2]))
+    sol = np.linalg.solve(M, n)
+    if sol[0] > 0 and sv[2] < 0:
+        return np.array([sol[1], sol[2]])
     else: 
         return np.array([np.nan, np.nan])    
    
@@ -205,10 +205,10 @@ def position_gnomon_horizontal(phi):
     Coordinates of the intersection point.
 
     """
-    if phi>=0:
-        return np.array([0,-1/tan(phi)])
+    if phi >= 0:
+        return np.array([0, -1/tan(phi)])
     else:
-        return np.array([0,1/tan(phi)])
+        return np.array([0, 1/tan(phi)])
 
 
 def position_gnomon_vertical(phi):
@@ -225,10 +225,10 @@ def position_gnomon_vertical(phi):
     Coordinates of the intersection point.
 
     """
-    if phi>=0:
-        return np.array([0,tan(phi)])
+    if phi >= 0:
+        return np.array([0, tan(phi)])
     else:
-        return np.array([0,-tan(phi)])
+        return np.array([0, -tan(phi)])
 
 
 def position_gnomon_arbitrary_orientation(phi, alpha, beta):
@@ -246,13 +246,13 @@ def position_gnomon_arbitrary_orientation(phi, alpha, beta):
     Coordinates of the intersection point.
 
     """
-    pg=np.array([0,cos(phi),sin(phi)])          #vector of the polar gnomon
-    n=np.array([-sin(alpha)*sin(beta),sin(alpha)*cos(beta),cos(alpha)])
-    v1=([cos(beta),sin(beta),0])
-    v2=np.array([-cos(alpha)*sin(beta),cos(alpha)*cos(beta),-sin(alpha)])
-    M=np.transpose(np.array([-pg,v1,v2]))
-    sol=np.linalg.solve(M,n)
-    return np.array([sol[1],sol[2]])
+    pg = np.array([0, cos(phi), sin(phi)])          #vector of the polar gnomon
+    n = np.array([-sin(alpha)*sin(beta), sin(alpha)*cos(beta), cos(alpha)])
+    v1 = np.array([cos(beta), sin(beta), 0])
+    v2 = np.array([-cos(alpha)*sin(beta), cos(alpha)*cos(beta), -sin(alpha)])
+    M = np.transpose(np.array([-pg, v1, v2]))
+    sol = np.linalg.solve(M, n)
+    return np.array([sol[1], sol[2]])
 
 
 def gnomon_horizontal(tau, phi):
@@ -276,8 +276,8 @@ def gnomon_vertical(tau, phi):
     tau : hour angle.
     phi : latitude.
     """     
-    if -np.pi/2<tau<np.pi/2:
-        if phi>=0:
+    if -np.pi/2 < tau < np.pi/2:
+        if phi >= 0:
             return arctan2(sin(tau)*cos(phi), -cos(tau))
         else:
             return arctan2(-sin(tau)*cos(phi), -cos(tau))
@@ -294,11 +294,11 @@ def gnomon_equatorial(tau, phi, upper_side=True):
     tau : hour angle.
     phi : latitude.
     """    
-    if phi>=0:
+    if phi >= 0:
         if upper_side:
             return tau
         else:
-            if tau>0:
+            if tau > 0:
                 return np.pi-tau
             else:
                 return -np.pi-tau
@@ -306,7 +306,7 @@ def gnomon_equatorial(tau, phi, upper_side=True):
         if upper_side:
             return -tau
         else:
-            if tau<0:
+            if tau < 0:
                 return np.pi+tau
             else:
                 return -np.pi+tau
@@ -323,16 +323,16 @@ def gnomon_arbitrary_orientation(tau, phi, alpha, beta):
     alpha: one of the orientation angles.
     betaa: one of the orientation angles.
     """     
-    sv=sun_vector(tau, 0, phi)
-    pg=np.array([0,cos(phi),sin(phi)])
-    aux1=np.cross(sv,pg)
-    n=np.array([-sin(alpha)*sin(beta),sin(alpha)*cos(beta),cos(alpha)])
-    v1=([cos(beta),sin(beta),0])
-    v2=np.array([-cos(alpha)*sin(beta),cos(alpha)*cos(beta),-sin(alpha)])
-    aux2=np.cross(n,aux1)
-    if np.dot(aux2,sv)<0:
-        aux2=-aux2
-    return arctan2(np.dot(aux2,v1), np.dot(aux2,v2))
+    sv = sun_vector(tau, 0, phi)
+    pg = np.array([0, cos(phi), sin(phi)])
+    aux1 = np.cross(sv, pg)
+    n = np.array([-sin(alpha)*sin(beta), sin(alpha)*cos(beta), cos(alpha)])
+    v1 = np.array([cos(beta), sin(beta), 0])
+    v2 = np.array([-cos(alpha)*sin(beta), cos(alpha)*cos(beta), -sin(alpha)])
+    aux2 = np.cross(n, aux1)
+    if np.dot(aux2, sv) < 0:
+        aux2 = -aux2
+    return arctan2(np.dot(aux2, v1), np.dot(aux2, v2))
 
 
 def sunset(delta, phi):
@@ -349,9 +349,9 @@ def sunset(delta, phi):
     Hour angle of sunset.
 
     """
-    if -tan(phi)*tan(delta)<=-1:
+    if -tan(phi)*tan(delta) <= -1:
         return np.pi
-    elif -tan(phi)*tan(delta)>=1:
+    elif -tan(phi)*tan(delta) >= 1:
         return 0
     else:
         return arccos(-tan(phi)*tan(delta))
