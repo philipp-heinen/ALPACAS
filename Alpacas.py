@@ -110,7 +110,7 @@ class Sundial:
             f1 = np.append(f1, tmp[0])
             f2 = np.append(f2, tmp[1])
         finite_ind = np.where(np.isfinite(f1)&np.isfinite(f2))[0]
-        if len(finite_ind)<2:
+        if len(finite_ind) < 2:
             return np.nan, np.nan
         else:
             return decs[finite_ind[0]], decs[finite_ind[-1]]
@@ -258,7 +258,7 @@ class Sundial:
             raise Exception("which must be 'hourly', 'half-hourly', 'two-hourly' or a list with the desired hours")        
         
         if not start_at_zero:
-            hours- = 12
+            hours -= 12
         
         return hours, np.asarray(labels)
         
@@ -435,7 +435,7 @@ class Sundial:
         None.
 
         """
-        if (self.phi>np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi<-np.pi/2+const.ECLIPTIC/180*np.pi):
+        if (self.phi > np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi < -np.pi/2+const.ECLIPTIC/180*np.pi):
             raise Exception("Babylonian hours are not supported for latitudes beyond the polar circles.")
         
         hours, labels = self._get_hours_and_labels(which, which_labels, start_at_zero=True)
@@ -453,7 +453,7 @@ class Sundial:
         for hour, label in zip(hours, labels):
             tau_summer = -maxtau_max+hour*np.pi/12
             tau_winter = -maxtau_min+hour*np.pi/12
-            if -maxtau_max<tau_summer<maxtau_max:
+            if -maxtau_max < tau_summer < maxtau_max:
                 if np.all(np.isfinite(self._nodus(tau_summer, decl_summer_solstice))) and np.all(np.isfinite(self._nodus(tau_winter, decl_winter_solstice))):
                     self.plotter.plot_straight_line(self._nodus(tau_summer, decl_summer_solstice), self._nodus(tau_winter, decl_winter_solstice), style=style, label=label, labelstyle=labelstyle)
                 else:    
@@ -477,7 +477,7 @@ class Sundial:
         None.
 
         """
-        if (self.phi>np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi<-np.pi/2+const.ECLIPTIC/180*np.pi):
+        if (self.phi > np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi < -np.pi/2+const.ECLIPTIC/180*np.pi):
             raise Exception("Italian hours are not supported for latitudes beyond the polar circles.")
         
         hours, labels = self._get_hours_and_labels(which, which_labels, start_at_zero=True)
@@ -495,7 +495,7 @@ class Sundial:
         for hour, label in zip(hours, labels):
             tau_summer = maxtau_max-2*np.pi+hour*np.pi/12
             tau_winter = maxtau_min-2*np.pi+hour*np.pi/12
-            if -maxtau_max<tau_summer<maxtau_max:
+            if -maxtau_max < tau_summer < maxtau_max:
                 if np.all(np.isfinite(self._nodus(tau_summer, decl_summer_solstice))) and np.all(np.isfinite(self._nodus(tau_winter, decl_winter_solstice))):
                     self.plotter.plot_straight_line(self._nodus(tau_summer, decl_summer_solstice), self._nodus(tau_winter, decl_winter_solstice), style=style, label=label, labelstyle=labelstyle)
                 else:    
@@ -519,7 +519,7 @@ class Sundial:
         None.
 
         """
-        if (self.phi>np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi<-np.pi/2+const.ECLIPTIC/180*np.pi):
+        if (self.phi > np.pi/2-const.ECLIPTIC/180*np.pi) or (self.phi < -np.pi/2+const.ECLIPTIC/180*np.pi):
             raise Exception("Temporal hours are not supported for latitudes beyond the polar circles.")        
     
         hours, labels = self._get_hours_and_labels(which, which_labels, start_at_zero=True)
@@ -540,7 +540,7 @@ class Sundial:
         for hour, label in zip(hours, labels):
             tau_summer = maxtau_max*(hour/6-1)
             tau_winter = maxtau_min*(hour/6-1)
-            if -maxtau_max<tau_summer<maxtau_max:
+            if -maxtau_max < tau_summer < maxtau_max:
                 if np.all(np.isfinite(self._nodus(tau_summer, decl_summer_solstice))) and np.all(np.isfinite(self._nodus(tau_winter, decl_winter_solstice))):
                     self.plotter.plot_straight_line(self._nodus(tau_summer, decl_summer_solstice), self._nodus(tau_winter, decl_winter_solstice), style=style, label=label, labelstyle=labelstyle)
                 else:    
