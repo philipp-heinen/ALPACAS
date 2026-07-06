@@ -22,7 +22,7 @@ import alpacas.sundial as snd
 ```
 Now we create a ``Sundial`` object:
 ```
-sundial = snd.sundial.Sundial(latitude=50.733, longitude=7.104, orientation="horizontal")
+sundial = snd.Sundial(latitude=50.733, longitude=7.104, orientation="horizontal")
 ```
 The latitude and longitude of the position where the sundial will be located must be provided in degrees, with latitudes in the northern hemisphere counting as positive and in the southern hemisphere as negative, as well as longitudes east of Greenwich counted as positive and west of it as negative. The ``orientation`` parameter (which defaults to "horizontal") determines the orientation of the sundial. The following options are available:
 
