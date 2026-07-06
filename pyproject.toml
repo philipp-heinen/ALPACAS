@@ -17,6 +17,17 @@ classifiers = [
 ]
 license = "GPL-3.0"
 license-files = ["LICENSE"]
+keywords = [
+    "sundial",
+    "plotting",
+    "computation",
+    "solar",
+    "astronomy",
+    "gnomon",
+    "nodus",
+    "equation of time",
+    "declination"
+]
 dependencies = [
     "numpy",
     "matplotlib"
