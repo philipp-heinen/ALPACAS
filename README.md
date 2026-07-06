@@ -6,20 +6,23 @@ On the other hand, for experts ALPACAS provides many functions for performing su
 ALPACAS supports sundials of the following orientations (i.e. orientation of the dial plane): horizontal, vertical, polar, equatorial and of arbitrary orientation provided by inclination angles. 
 
 ## Requirements and Installation
-ALPACAS needs only the ``numpy`` and ``matplotlib`` packages. For using the library, just download this repository and then make it known to your Python interpreter, e.g. under Linux by running 
+ALPACAS needs only the ``numpy`` and ``matplotlib`` packages. Install with 
 ```
-export PYTHONPATH=<path to the repository>/ALPACAS:$PYTHONPATH
+pip install alpacas
 ```
-or adding this line to your ``~/.bashrc`` file to make this permanent.
+or with 
+```
+pip install git+https://github.com/philipp-heinen/ALPACAS.git
+```
 
-## Plotting functionalities
-The plotting functionalities are contained in the core module ``Alpacas``. First import this module:
+## Sundial plotting functionalities
+The sundial plotting functionalities are contained in the core module ``sundial``. First import this module:
 ```
-import Alpacas as alp
+import alpacas.sundial as snd
 ```
 Now we create a ``Sundial`` object:
 ```
-sundial = alp.Sundial(latitude=50.733, longitude=7.104, orientation="horizontal")
+sundial = snd.sundial.Sundial(latitude=50.733, longitude=7.104, orientation="horizontal")
 ```
 The latitude and longitude of the position where the sundial will be located must be provided in degrees, with latitudes in the northern hemisphere counting as positive and in the southern hemisphere as negative, as well as longitudes east of Greenwich counted as positive and west of it as negative. The ``orientation`` parameter (which defaults to "horizontal") determines the orientation of the sundial. The following options are available:
 
@@ -85,19 +88,19 @@ sundial.save_dial_plot("Sundial.png", resolution=300)
 The ``resolution`` is provided in dpi.
 
 ## Computation functionalities
-The computation functionalities are contained in the ``BasicFunctions`` module. For example, compute the position of the shadow a nodus casts onto a horizontal sundial at hour angle $\tau=20^\circ$, declination $\delta=10^\circ$ and latitude $\phi=50^\circ$,:
+The computation functionalities are contained in the ``basic_functions`` module. For example, compute the position of the shadow a nodus casts onto a horizontal sundial at hour angle $\tau=20^\circ$, declination $\delta=10^\circ$ and latitude $\phi=50^\circ$,:
 ```
->>> import BasicFunctions as bf
+>>> import alpacas.basic_functions as bf
 >>> import numpy as np
 >>> bf.nodus_horizontal(tau=np.deg2rad(20), delta=np.deg2rad(10), phi=np.deg2rad(50))
 array([0.46275402, 0.82060332])
 ```
-Note that the functions in ``BasicFunctions`` in general take angles in radian and not in degree.
+Note that the functions in ``basic_functions`` in general take angles in radian and not in degree.
 The single functions provided are documented well within the code, so we refrain from a detailed documentation here.
 
-The module ``CelestialMechanics`` provides essential functionalities such as the computation of the solar declination and equation of time for a specified date. For example, compute the declination in radian and the equation of time in minutes for 1 January:
+The module ``celestial_mechanics`` provides essential functionalities such as the computation of the solar declination and equation of time for a specified date. For example, compute the declination in radian and the equation of time in minutes for 1 January:
 ```
->>> import CelestialMechanics as cm
+>>> import alpacas.celestial_mechanics as cm
 >>> cm.declination_date(month=1, day=1, leap_year=False)
 -0.40081282075217145
 >>> cm.equation_of_time_date(month=1, day=1, leap_year=False)
