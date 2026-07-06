@@ -221,13 +221,9 @@ class Plotter:
             angle = 0
 
         if side == "left":
-            coord = np.array([X[ind], Y[ind]]) - tightness * np.array(
-                [tang[1], -tang[0]]
-            )
+            coord = np.array([X[ind], Y[ind]]) - tightness * np.array([tang[1], -tang[0]])
         elif side == "right":
-            coord = np.array([X[ind], Y[ind]]) + tightness * np.array(
-                [tang[1], -tang[0]]
-            )
+            coord = np.array([X[ind], Y[ind]]) + tightness * np.array([tang[1], -tang[0]])
         elif side == "center":
             coord = np.array([X[ind], Y[ind]])
         else:
@@ -275,8 +271,9 @@ class Plotter:
                 rotate=labelstyle["rotate"],
                 rotation_type=labelstyle["rotation_type"],
             )
-            if (-self.xsize / 2 < pos[0][0] < self.xsize / 2) and (
-                -self.ysize / 2 < pos[0][1] < self.ysize / 2
+            if (
+                -self.xsize / 2 < pos[0][0] < self.xsize / 2
+                and -self.ysize / 2 < pos[0][1] < self.ysize / 2
             ):
                 self.text(
                     label,

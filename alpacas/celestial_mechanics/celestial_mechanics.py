@@ -260,8 +260,7 @@ def find_solstice(which, exact=True):
                 (
                     declination(x + eps / 2, exact=exact)
                     - declination(x - eps / 2, exact=exact)
-                )
-                / eps
+                ) / eps
             ),
             0,
             0.5,
@@ -272,8 +271,7 @@ def find_solstice(which, exact=True):
                 (
                     declination(x + eps / 2, exact=exact)
                     - declination(x - eps / 2, exact=exact)
-                )
-                / eps
+                ) / eps
             ),
             0.5,
             1,

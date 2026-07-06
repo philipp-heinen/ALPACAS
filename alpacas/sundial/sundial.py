@@ -288,9 +288,7 @@ class Sundial:
             hours = np.asarray(which)
             if which_labels == "no_labels":
                 labels = [None for hour in hours]
-            elif isinstance(which_labels, (list, np.ndarray)) and len(
-                which_labels
-            ) == len(which):
+            elif isinstance(which_labels, (list, np.ndarray)) and len(which_labels) == len(which):
                 labels = which_labels
             else:
                 raise Exception(
@@ -325,7 +323,9 @@ class Sundial:
             for tau, label in zip(taus, labels):
                 if np.all(
                     np.isfinite(self._nodus(tau, decl_summer_solstice))
-                ) and np.all(np.isfinite(self._nodus(tau, decl_winter_solstice))):
+                ) and np.all(
+                    np.isfinite(self._nodus(tau, decl_winter_solstice))
+                ):
                     self.plotter.plot_straight_line(
                         self._nodus(tau, decl_summer_solstice),
                         self._nodus(tau, decl_winter_solstice),
@@ -649,8 +649,9 @@ class Sundial:
         None.
 
         """
-        if (self.phi > np.pi / 2 - const.ECLIPTIC / 180 * np.pi) or (
-            self.phi < -np.pi / 2 + const.ECLIPTIC / 180 * np.pi
+        if (
+            self.phi > np.pi / 2 - const.ECLIPTIC / 180 * np.pi
+            or self.phi < -np.pi / 2 + const.ECLIPTIC / 180 * np.pi
         ):
             raise Exception(
                 "Italian hours are not supported for latitudes beyond the polar circles."
