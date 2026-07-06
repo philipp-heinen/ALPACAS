@@ -171,7 +171,7 @@ def nodus_arbitrary_orientation(tau, delta, phi, alpha, beta):
     delta : declination.
     phi: latitude.
     alpha: one of the orientation angles.
-    betaa: one of the orientation angles.
+    beta: one of the orientation angles.
     Returns
     -------
     A vector with the x and y coordinate of the shadow point as entries.
@@ -233,14 +233,14 @@ def position_gnomon_vertical(phi):
 
 def position_gnomon_arbitrary_orientation(phi, alpha, beta):
     """
-    Calculates the position where a gnomon polar intersects with the dial plane if it passes through the nodus, which is placed one unit length above the coordinate origin (in the dial coordinates).
+    Calculates the position where a polar gnomon intersects with the dial plane if it passes through the nodus, which is placed one unit length above the coordinate origin (in the dial coordinates).
     The orientation of the dial is described by the angles alpha and beta as in nodus_arbitrary_orientation(). Coordinates are defined as in the other functions. 
 
     Parameters
     ----------
     phi : latitude.
     alpha: one of the orientation angles.
-    betaa: one of the orientation angles.
+    beta: one of the orientation angles.
     Returns
     -------
     Coordinates of the intersection point.
@@ -321,7 +321,7 @@ def gnomon_arbitrary_orientation(tau, phi, alpha, beta):
     tau : hour angle.
     phi : latitude.
     alpha: one of the orientation angles.
-    betaa: one of the orientation angles.
+    beta: one of the orientation angles.
     """     
     sv = sun_vector(tau, 0, phi)
     pg = np.array([0, cos(phi), sin(phi)])

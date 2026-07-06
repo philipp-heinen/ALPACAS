@@ -546,4 +546,4 @@ class Sundial:
                 else:    
                     decmin, decmax = self._max_decs(lambda x: self._nodus(bf.sunset(x, self.phi)*(hour/6-1), x))
                     taumin, taumax = bf.sunset(decmin, self.phi)*(hour/6-1), bf.sunset(decmax, self.phi)*(hour/6-1)
-                    self.plotter.plot_straight_line(self._nodus(taumax, decmax), self._nodus(taumin, decmin), style=style, label=label, labelstyle=labelstyle)    
+                    self.plotter.plot_straight_line(self._nodus(taumax, decmax), self._nodus(taumin, decmin), style=style, label=label, labelstyle=labelstyle)

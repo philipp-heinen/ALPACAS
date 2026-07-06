@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alpacas"
+version = "0.0.1"
+authors = [
+  { name="Philipp Heinen", email="philippheinen97@gmail.com" },
+]
+description = "Compute and plot sundials of different types and orientations; also contains some useful astronomical functions (equation of time, declination as function of date, sunset and sunrise)"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "GNU GPLv3"
+license-files = ["LICENSE"]
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+
+[project.urls]
+Homepage = "https://github.com/philipp-heinen/ALPACAS"
+Issues = "https://github.com/philipp-heinen/ALPACAS/issues"
+
+[tool.setuptools.packages.find]
+where = ["alpacas"]
