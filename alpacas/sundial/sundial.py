@@ -1,8 +1,8 @@
 import numpy as np
-import BasicFunctions as bf
-import Plotting as pl
-import CelestialMechanics as cm
-import Constants as const
+import alpacas.basic_functions as bf
+import alpacas.plotting as pl
+import alpacas.celestial_mechanics as cm
+import alpacas.constants as const
 
 class Sundial:
     def __init__(self, latitude=45, longitude=0, orientation="horizontal"):

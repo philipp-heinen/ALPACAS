@@ -5,7 +5,7 @@ This module provides tools for calculating the declination and the equation of t
 import numpy as np
 from numpy import cos, sin, tan, arccos, arcsin, arctan, arctan2, sqrt, pi
 import datetime as dt
-import Constants as const
+import alpacas.constants as const
 
 
 def solve(f, a, b, tol=1e-12, args=()):
