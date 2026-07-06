@@ -26,5 +26,5 @@ dependencies = [
 Homepage = "https://github.com/philipp-heinen/ALPACAS"
 Issues = "https://github.com/philipp-heinen/ALPACAS/issues"
 
-[tool.setuptools.packages.find]
-include = ["alpacas*"]
+[tool.setuptools]
+packages = ["alpacas"]
