@@ -34,15 +34,17 @@ roman_num = {
 
 
 class Plotter:
-    def __init__(self, xsize=10, ysize=10, cm_per_unit=2):
+    def __init__(self, xsize=10, ysize=10, offset_x=0, offset_y=0, cm_per_unit=2):
         self.layout = {}
         self.fig = plt.figure(
             figsize=(xsize * cm_per_unit / 2.54, ysize * cm_per_unit / 2.54)
         )
         self.ax = self.fig.add_axes((0, 0, 1, 1))
-        self.ax.axis(xmin=-xsize / 2, xmax=xsize / 2, ymin=-ysize / 2, ymax=ysize / 2)
+        self.ax.axis(xmin=-xsize / 2 + offset_x, xmax=xsize / 2 + offset_x, ymin=-ysize / 2 + offset_y, ymax=ysize / 2 + offset_y)
         self.xsize = xsize
         self.ysize = ysize
+        self.offset_x = offset_x
+        self.offset_y = offset_y
 
     def save(self, filename, resolution=300):
         self.fig.savefig(filename, dpi=resolution)
@@ -88,19 +90,19 @@ class Plotter:
 
         if np.isclose(vec[0], 0):
             nus = np.array(
-                [(-self.ysize / 2 - A[1]) / vec[1], (self.ysize / 2 - A[1]) / vec[1]]
+                [(-self.ysize / 2 + self.offset_y - A[1]) / vec[1], (self.ysize / 2 + self.offset_y - A[1]) / vec[1]]
             )
         elif np.isclose(vec[1], 0):
             nus = np.array(
-                [(-self.xsize / 2 - A[0]) / vec[0], (self.xsize / 2 - A[0]) / vec[0]]
+                [(-self.xsize / 2 + self.offset_x - A[0]) / vec[0], (self.xsize / 2 + self.offset_x - A[0]) / vec[0]]
             )
         else:
             temp_nus = np.array(
                 [
-                    (-self.xsize / 2 - A[0]) / vec[0],
-                    (self.xsize / 2 - A[0]) / vec[0],
-                    (-self.ysize / 2 - A[1]) / vec[1],
-                    (self.ysize / 2 - A[1]) / vec[1],
+                    (-self.xsize / 2 + self.offset_x - A[0]) / vec[0],
+                    (self.xsize / 2 + self.offset_x - A[0]) / vec[0],
+                    (-self.ysize / 2 + self.offset_y - A[1]) / vec[1],
+                    (self.ysize / 2 + self.offset_y - A[1]) / vec[1],
                 ]
             )
             nus = np.array([])
@@ -108,16 +110,16 @@ class Plotter:
                 if (
                     i < 2
                     and (
-                        -self.ysize / 2 - 1e-8
+                        -self.ysize / 2 + self.offset_y - 1e-8
                         <= A[1] + vec[1] * temp_nus[i]
-                        <= self.ysize / 2 + 1e-8
+                        <= self.ysize / 2 + self.offset_y + 1e-8
                     )
                 ) or (
                     i >= 2
                     and (
-                        -self.xsize / 2 - 1e-8
+                        -self.xsize / 2 + self.offset_x - 1e-8
                         <= A[0] + vec[0] * temp_nus[i]
-                        <= self.xsize / 2 + 1e-8
+                        <= self.xsize / 2 + self.offset_x + 1e-8
                     )
                 ):
                     nus = np.append(nus, temp_nus[i])
@@ -178,8 +180,8 @@ class Plotter:
         Y = Y[ind_notnan]
 
         ind_inside = np.where(
-            ((-self.xsize / 2 < X) & (X < self.xsize / 2))
-            & ((-self.ysize / 2 < Y) & (Y < self.ysize / 2))
+            ((-self.xsize / 2 + self.offset_x < X) & (X < self.xsize / 2 + self.offset_x))
+            & ((-self.ysize / 2 + self.offset_y < Y) & (Y < self.ysize / 2 + self.offset_y))
         )[0]
         X = X[ind_inside]
         Y = Y[ind_inside]
@@ -272,8 +274,8 @@ class Plotter:
                 rotation_type=labelstyle["rotation_type"],
             )
             if (
-                -self.xsize / 2 < pos[0][0] < self.xsize / 2
-                and -self.ysize / 2 < pos[0][1] < self.ysize / 2
+                -self.xsize / 2 + self.offset_x < pos[0][0] < self.xsize / 2 + self.offset_x
+                and -self.ysize / 2 + self.offset_y < pos[0][1] < self.ysize / 2 + self.offset_y
             ):
                 self.text(
                     label,

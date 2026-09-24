@@ -140,7 +140,7 @@ class Sundial:
         else:
             return decs[finite_ind[0]], decs[finite_ind[-1]]
 
-    def init_dial_plot(self, xsize=10, ysize=10, cm_per_unit=2):
+    def init_dial_plot(self, xsize=10, ysize=10, offset_x=0, offset_y=0, cm_per_unit=2):
         """
         Initiates a new dial plot.
 
@@ -155,7 +155,7 @@ class Sundial:
         None.
 
         """
-        self.plotter = pl.Plotter(xsize, ysize, cm_per_unit)
+        self.plotter = pl.Plotter(xsize, ysize, offset_x, offset_y, cm_per_unit)
         self.xsize = xsize
         self.ysize = ysize
 
